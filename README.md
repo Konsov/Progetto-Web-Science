@@ -1,5 +1,5 @@
 # Web-Science-Project
-Development of a website as a project for the web science course 2016/20167
+Development of a website as a project for the web science course 2016/2017
 
 **Description** <br>
 Project is developed in HTML-5, javascript and CSS.
