@@ -1,0 +1,76 @@
+
+@CHARSET "ISO-8859-1";
+
+body{
+		background: url("../images/background.jpg");
+		
+}
+
+.containercampaigns{
+	height: 500px;
+  	width: 40%;
+  	margin-left:30%;
+	margin-top:5%;
+	text-align:center;
+    overflow:hidden;
+}
+
+.containercampaigns:hover{
+	overflow: auto;
+     padding-right: 1px;
+}
+
+.container{
+	margin-top:1%;
+	background: rgba(255, 255, 255, .5);
+	border-radius: 10px;
+	padding-bottom:2%;
+}
+
+
+
+.containercampaignsworker{
+	margin-top:5%;
+	text-align:center;
+
+}
+
+
+.container1{
+	width: 40%;
+	height: 500px;
+	margin-top:1%;
+	margin-left:3%;
+    overflow:hidden;
+    display:inline-block;
+    vertical-align:top;
+}
+.container1:hover{
+	overflow: auto;
+     padding-right: 1px;
+}
+
+
+.containerWorker{
+	margin-top:1%;
+	width: 100%;
+	background: rgba(255, 255, 255, .5);
+	border-radius: 10px;
+	padding-bottom:2%;
+}
+form{
+	display: inline;
+}
+
+.button{
+	text-align:center;
+	color:#FFFFFF;
+	width:20%;
+	height:30px;
+	background-color:rgba(255, 0, 0, .6);
+	border-radius:10px;
+}
+
+a{
+	margin-left:2%;
+}

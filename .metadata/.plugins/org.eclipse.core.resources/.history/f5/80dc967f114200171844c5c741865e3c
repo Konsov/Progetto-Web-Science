@@ -1,0 +1,76 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<%@ page import="com.beans.User"%>
+<%@ page import="com.beans.Campaign"%>
+<%@ page import="com.beans.Image"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+
+
+<script>
+
+function selection( s,  name){
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.getElementById(name).remove();
+	    }
+	  };
+	  xhttp.open("GET", "Valutation?boolean="+s+"&id="+name, true);
+	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  xhttp.send();
+};
+	  
+</script>
+
+<title>Selection Image</title>
+</head>
+<body>
+	<%
+		if (session.getAttribute("user") == null) {
+
+			response.sendRedirect("Login.jsp");
+		} else {
+			Campaign campaign = new Campaign();
+			campaign.setNomeCampagna(request.getParameter("campaignname"));
+
+			List<Image> images = new ArrayList<Image>();
+			images = campaign.loadCampaignImages();
+	%>
+	<h2>Images from Campaign:<%=campaign.getNomeCampagna()%></h2>
+	<div class='container1'>
+		<%
+			if (images.size() == 0) {
+		%><p>There Aren't images to select !</p>
+		<%
+			} else {
+					for (Image i : images) {
+		%>
+		<div class='container'>
+			<img src='/project/images/<%=i.getName()%>' width='400' height='200'><br>
+					<input type='button' value='Accetta' id="<%=i.getName() %>" onclick='selection("true", this.id)'>
+			<input type='button' value='Rifiuta' id="<%=i.getName() %>" onclick='selection("false", this.id)'>
+		</div>
+		<br>
+		<%
+			}
+		%>
+	</div>
+	<%
+		}
+	%>
+	<form action='Home.jsp'>
+		<input class='button' type='submit' value='Turn on my Campaigns'>
+	</form>
+
+	<%
+		}
+	%>
+
+</body>
+</html>

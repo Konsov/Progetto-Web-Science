@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+
+body{
+		background: url("../images/background.jpg");
+}
+
+.container {
+	width: 40%;
+  	margin-left:30%;
+	margin-top:15%;
+	text-align: center;
+}
+
+.inputText{
+	padding-left:10px;
+	color:#FFFFFF;
+	width:60%;
+	height:35px;
+	margin-top:2%;
+	background-color:transparent;
+	border-radius:10px;
+	border: 1px solid #FFFFFF;
+}
+
+.button{
+	text-align:center;
+	color:#FFFFFF;
+	width:60%;
+	height:35px;
+	margin-top:7%;
+	background-color:red;
+	opacity:0.8;
+	border-radius:10px;
+}
+
+#error{
+	visibility:hidden;
+	color:#FFFFFF;
+}

@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ page import="com.beans.User"%>
+<%@ page import="com.beans.Campaign"%>
+<%@ page import="com.beans.Image"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+
+
+<title>Annotation Task</title>
+<style>
+#drawboard {
+	border: 1px solid #000;
+}
+</style>
+<script>
+
+var image = null;
+var ctx = null; 
+var started = false;
+
+function disegnare(pixelLine){
+		image = document.getElementById('image');
+		ctx = document.querySelector('canvas').getContext('2d');
+		ctx.lineWidth = pixelLine; //dimensione linea
+		ctx.strokeStyle = 'red';
+		started = false;
+		ctx.drawImage(image, 0, 0, document.querySelector('canvas').width,document.querySelector('canvas').height );
+
+		iniziaDisegno = function(evento) {
+			ctx.beginPath();
+			ctx.moveTo(evento.offsetX, evento.offsetY);
+			started = true;
+		}
+
+		disegna = function(evento) {
+			if (started) {
+				ctx.lineTo(evento.offsetX, evento.offsetY);
+				ctx.stroke();
+			}
+		}
+
+		fermaDisegno = function(evento) {
+			ctx.closePath();
+			started = false;
+		}
+
+		attivaIlCanvas = function(evento) {	
+			
+			ctx.canvas.addEventListener('mousedown', iniziaDisegno, false);
+			ctx.canvas.addEventListener('mousemove', disegna, false);
+			ctx.canvas.addEventListener('mouseup', fermaDisegno, false);
+			ctx.canvas.addEventListener('mouseleave', fermaDisegno, false);
+		}
+
+		window.addEventListener('load', attivaIlCanvas, false);
+}
+		function erase() {
+			ctx.clearRect(0, 0, document.querySelector('canvas').width,document.querySelector('canvas').height);
+			ctx.drawImage(image, 0, 0, document.querySelector('canvas').width,document.querySelector('canvas').height);
+		}
+		
+		function next(name_image){
+			alert("ciao1");
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					alert("bohobhohb");
+					init();
+				}
+			};
+			xhttp.open("GET", "AnnotationServlet?id=" + name_image, true);
+			xhttp.setRequestHeader("Content-type",
+					"application/x-www-form-urlencoded");
+			xhttp.send();
+		}
+
+
+	</script>
+</head>
+
+
+<body>
+	<%
+		Campaign campaign = new Campaign();
+		campaign.setNomeCampagna(request.getParameter("campaignname"));
+		int pixelLine = campaign.getPixellineByName();
+		Image mountain = new Image();
+		mountain = campaign.loadImageToAnnote(((User) session.getAttribute("user")).getUsername());
+	%>
+	<canvas id="drawboard" width='900' height='500'></canvas>
+
+	<img id="image" style="display: none"
+		src="/project/immaginiCampagne/<%=mountain.getName()%>"
+		onload='disegnare(<%=pixelLine%>)'>
+
+
+
+	<input type="button" onclick="next('<%=mountain.getName()%>')"
+		value="Gonferma Annodazione" />
+	<input type="button" onclick="erase()" value="cangella" />
+	<script>	
+		init(){
+			document.getElementById('image').src="/project/immaginiCampagne/"+<%=campaign.loadImageToAnnote(((User) session.getAttribute("user")).getUsername()).getName()%>;
+		}
+	</script>
+</body>
+</html>
+

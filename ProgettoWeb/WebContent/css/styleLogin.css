@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+
+
+body{
+		background: url("../images/background.jpg");
+		
+}
+
+.container {
+	text-align: center;
+}
+
+h1{
+	font-family: 'Quicksand';
+	font-size: 45px;
+    color: #FFFFFF;
+    letter-spacing: 3px;
+}
+
+.containerForm{
+  	width: 40%;
+  	margin-left:30%;
+	margin-top:10%;
+}
+
+.inputText{
+	padding-left:10px;
+	color:#FFFFFF;
+	width:60%;
+	height:35px;
+	margin-top:5%;
+	background-color:transparent;
+	border-radius:10px;
+	border: 1px solid #FFFFFF;
+}
+
+.button{
+	text-align:center;
+	color:#FFFFFF;
+	width:60%;
+	height:35px;
+	margin-top:5%;
+	margin-bottom:5%;
+	background-color:red;
+	opacity:0.8;
+	border-radius:10px;
+}
+
+#error{
+	visibility:hidden;
+	color:#FFFFFF;
+}
+
+a{
+	color:#FFFFFF;
+}
